@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  id          Int        @id @default(autoincrement())
+  name        String     @db.VarChar(100)
+  description String?    @db.Text
+  created_at  DateTime?  @default(now()) @db.Timestamp(0)
+  updated_at  DateTime?  @default(now()) @db.Timestamp(0)
+  products    products[]
+}
+
+model products {
+  id            String           @id @db.Char(36)
+  sku           String           @unique(map: "sku") @db.VarChar(100)
+  name          String           @db.VarChar(150)
+  description   String?          @db.Text
+  price         Decimal          @db.Decimal(10, 2)
+  current_stock Int?             @default(0)
+  min_stock     Int?             @default(5)
+  status        products_status? @default(ACTIVE)
+  category_id   Int?
+  supplier_id   String?          @db.Char(36)
+  created_at    DateTime?        @default(now()) @db.Timestamp(0)
+  updated_at    DateTime?        @default(now()) @db.Timestamp(0)
+  deleted_at    DateTime?        @db.Timestamp(0)
+  categories    categories?      @relation(fields: [category_id], references: [id], onUpdate: NoAction, map: "products_ibfk_1")
+  suppliers     suppliers?       @relation(fields: [supplier_id], references: [id], onUpdate: NoAction, map: "products_ibfk_2")
+
+  @@index([category_id], map: "category_id")
+  @@index([supplier_id], map: "supplier_id")
+}
+
+model suppliers {
+  id           String     @id @db.Char(36)
+  name         String     @db.VarChar(150)
+  email        String     @unique(map: "email")
+  phone        String?    @db.VarChar(50)
+  contact_info String?    @db.Text
+  created_at   DateTime?  @default(now()) @db.Timestamp(0)
+  updated_at   DateTime?  @default(now()) @db.Timestamp(0)
+  deleted_at   DateTime?  @db.Timestamp(0)
+  products     products[]
+}
+
+model users {
+  id         String      @id @db.Char(36)
+  email      String      @unique(map: "email")
+  password   String      @db.VarChar(255)
+  full_name  String      @db.VarChar(150)
+  role       users_role? @default(VIEWER)
+  created_at DateTime?   @default(now()) @db.Timestamp(0)
+  updated_at DateTime?   @default(now()) @db.Timestamp(0)
+  deleted_at DateTime?   @db.Timestamp(0)
+}
+
+enum users_role {
+  ADMIN
+  MANAGER
+  VIEWER
+}
+
+enum products_status {
+  ACTIVE
+  DRAFT
+  DISCONTINUED
+}
