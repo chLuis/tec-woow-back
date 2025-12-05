@@ -1,9 +1,8 @@
 import { randomUUID } from 'crypto';
-import { AppError } from '../../middleware/app-error';
-import { prisma } from '../../prisma/client';
-import { PaginatedResult } from '../../utils/types';
+import { AppError } from '@/middleware/app-error.js';
+import { prisma } from '@/prisma/client.js';
 import { Prisma } from '@prisma/client';
-import { CreateSupplierInput } from './suppliers.schema';
+import { CreateSupplierInput } from '@/modules/suppliers/suppliers.schema.js';
 
 export const createSupplier = async (data: CreateSupplierInput) => {
   const existingSupplier = await prisma.suppliers.findUnique({

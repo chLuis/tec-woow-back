@@ -1,8 +1,8 @@
 import { randomUUID } from 'crypto';
-import { AppError } from '../../middleware/app-error';
-import { prisma } from '../../prisma/client';
-import { CreateUserInput, LoginUserInput } from './auth.schema';
-import { comparePassword, hashPassword } from '../../utils/hash';
+import { AppError } from '@/middleware/app-error.js';
+import { prisma } from '@/prisma/client.js';
+import { CreateUserInput, LoginUserInput } from '@/modules/auth/auth.schema.js';
+import { comparePassword, hashPassword } from '@/utils/hash.js';
 import jwt from 'jsonwebtoken';
 
 export const registerUser = async (data: CreateUserInput) => {

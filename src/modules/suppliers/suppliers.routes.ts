@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { create, deleteSupplier, getAll, update } from "./suppliers.controller";
-import { validate } from "../../middleware/validate";
-import { createSupplierSchema, deleteSupplierSchema, updateSupplierSchema } from "./suppliers.schema";
-import { authMiddleware } from "../../middleware/auth-middleware";
+import { create, deleteSupplier, getAll, update } from "@/modules/suppliers/suppliers.controller.js";
+import { validate } from "@/middleware/validate.js";
+import { createSupplierSchema, deleteSupplierSchema, updateSupplierSchema } from "@/modules/suppliers/suppliers.schema.js";
+import { authMiddleware } from "@/middleware/auth-middleware.js";
 
 const route = Router()
 route.get('/', authMiddleware, getAll);

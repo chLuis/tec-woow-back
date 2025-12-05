@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import * as authService from './auth.service';
-
+import * as authService from '@/modules/auth/auth.service.js';
 
 
 export const create = async (req: Request, res: Response, next: NextFunction) => {

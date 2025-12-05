@@ -1,8 +1,8 @@
 import { randomUUID } from 'crypto';
-import { AppError } from '../../middleware/app-error';
-import { prisma } from '../../prisma/client';
-import { CreateProductInput } from './products.schema';
-import { DashboardResult, PaginatedResult } from '../../utils/types';
+import { AppError } from '@/middleware/app-error.js';
+import { prisma } from '@/prisma/client.js';
+import { CreateProductInput } from '@/modules/products/products.schema.js';
+import { DashboardResult, PaginatedResult } from '@/utils/types.js';
 import { Prisma } from '@prisma/client';
 
 export const createProduct = async (data: CreateProductInput) => {

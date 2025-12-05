@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import * as supplierService from './suppliers.service';
+import * as supplierService from '@/modules/suppliers/suppliers.service.js';
 
 export const getAll = async (req: Request, res: Response, next: NextFunction) => {
   try {

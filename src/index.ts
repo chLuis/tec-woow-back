@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
-import routesProducts from '../src/modules/products/products.routes'
-import routesSuppliers from '../src/modules/suppliers/suppliers.routes'
-import routesAuth from '../src/modules/auth/auth.routes'
-import { errorHandler } from "./middleware/app-error";
+import routesProducts from '@/modules/products/products.routes.js';
+import routesSuppliers from '@/modules/suppliers/suppliers.routes.js';
+import routesAuth from '@/modules/auth/auth.routes.js';
+import { errorHandler } from "@/middleware/app-error.js";
 const app = express();
 
 app.use(cors({
